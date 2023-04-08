@@ -1,0 +1,30 @@
+version: '3'
+
+services:
+  db:
+    image: mysql:8.0
+    environment:
+      MYSQL_DATABASE: src_development
+      MYSQL_ROOT_PASSWORD: <%= ENV['DB_PASSWORD'] %>
+    volumes:
+      - ./mysql_data:/var/lib/mysql
+
+  web:
+    build: .
+    command: bundle exec rails s -p 3000 -b '0.0.0.0'
+    ports:
+      - "8080:3000"
+    depends_on:
+      - db
+      networks:
+      - src_net
+    environment:
+      DB_HOST: db
+      DB_USERNAME: src_development
+      DB_PASSWORD: <%= ENV['DB_PASSWORD'] %>
+      DB_NAME: src_development
+volumes:
+  db_data:
+networks:
+  myapp_net:
+    driver: bridge
