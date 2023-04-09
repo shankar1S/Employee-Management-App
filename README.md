@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Employee Management App
 This is a Ruby on Rails based web application for managing employee data.
 
@@ -36,4 +37,5 @@ bundle exec rails s -p 3000 -b '0.0.0.0'
 ## Usage
 
 After starting the server, you can access the web application by visiting http://localhost:3000 in your web browser.
+=======
 

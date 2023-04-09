@@ -1,0 +1,24 @@
+version: '3'
+
+services:
+  db:
+    image: mysql:5.7
+    environment:
+      MYSQL_DATABASE: employee_management_app_development
+      MYSQL_ROOT_PASSWORD: password
+    volumes:
+      - ./mysql_data:/var/lib/mysql
+
+  web:
+    build: .
+    command: bundle exec rails s -p 3000 -b '0.0.0.0'
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db
+    environment:
+      DB_HOST: db
+      DB_USERNAME: root
+      DB_PASSWORD: password
+      DB_NAME: employee_management_app_development
+
